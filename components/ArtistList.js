@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableHighlight } from 'react-native';
 import ArtistBox from './ArtistBox';
+import { Actions } from 'react-native-router-flux';
+
 
 export default class ArtistList extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ export default class ArtistList extends Component {
         this.updateDataSource(this.props.artists)
     }
    
-     componentWillReceiveProps(newProps) {
+     componentDidUpdate(newProps) {
         if (newProps.artists !== this.props.artists) {
           this.updateDataSource(newProps.artists)
         }
@@ -20,20 +22,24 @@ export default class ArtistList extends Component {
 
     updateDataSource = (data) => {
         this.setState({artistsData: data});
+        //console.log(data);
     }
 
     navigateToDetails = (data) => {
-        Actions.details(data)
+        Actions.details({data});
+        console.log(data)
     }
 
     render() {
-        const loadArtistBox = ({item}) => {
-            <ArtistBox
-            name={item.name}
-            imageUri={item.image}
-            onPress={() => {this.navigateToDetails({item})}}
-             />
-        }
+        const loadArtistBox = ({item}) => (
+            <TouchableHighlight
+            onPress={ () => {this.navigateToDetails(item)} }
+            >
+                <ArtistBox
+                artist = {item}
+                />
+            </TouchableHighlight>
+        )
 
         return (
             <FlatList

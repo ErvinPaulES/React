@@ -5,15 +5,15 @@ import ArtistBox from './ArtistBox';
 export default class details extends Component {
     constructor(props) {
         super(props);
-        this.state = {artistsData: data}
     }
 
     render() {
+
+        const artist = this.props.data
         return (
             <View style={styles.container}>
                 <ArtistBox
-                name={item.name}
-                imageUri={item.image}
+                artist={artist}
                 />
             </View>
         )
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ccc',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
 })

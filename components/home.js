@@ -13,7 +13,10 @@ export default class HomeView extends Component {
   }
 
   componentDidMount() {
-    getMusicData().then(data => this.setState({ artists: data })).then(console.log('log is' + this.state.artists))
+    getMusicData().then(data => { 
+      this.setState({ artists: data });
+      //console.log(data);
+    });
     
   }
 
